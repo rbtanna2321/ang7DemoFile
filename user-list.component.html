@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-primary pull-right " (click)="openModalAdd(add)" style="margin-bottom: 10px;">add</button>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>name</th>
+          <th>address</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.address}}</td>
+          <td>
+            <button class="btn btn-danger " (click)="openModalEdit(edit , user)">Edit</button> |
+            <button class="btn btn-warning " (click)="openModalDelete(delete , user._id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #add>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <form>
+     <label for="name">Name</label>
+     <input type="text" class="form-control" name="name" [(ngModel)]="user.name">
+     <p class="text-danger">{{errorMsg.name}}</p>
+
+     <label for="name">Address</label>
+     <input type="text" class="form-control" name="name" [(ngModel)]="user.address">
+     <p class="text-danger">{{errorMsg.address}}</p>
+
+     <button class="btn btn-primary" (click)="onSave()">Save</button>
+   </form>
+  </div>
+</ng-template>
+
+<ng-template #edit>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="editUser.name">
+      <p class="text-danger">{{errorMsg.name}}</p>
+
+      <label for="name">Address</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="editUser.address">
+      <p class="text-danger">{{errorMsg.address}}</p>
+
+      <button class="btn btn-primary" (click)="onUpdate()">Update</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #delete>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are You Sure U want To Delete This Record!</p>
+    <button class="btn btn-primary" (click)="modalRef.hide()">No</button> |
+    <button  class="btn btn-danger" (click)="deleteUser()">Yes</button>
+  </div>
+</ng-template>
